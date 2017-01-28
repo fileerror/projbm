@@ -24,6 +24,7 @@ object Form_historypage: TForm_historypage
       Caption = #1064#1080#1092#1088' '#1042#1080#1078#1077#1085#1077#1088#1072
       object N3: TMenuItem
         Caption = #1064#1080#1092#1088#1086#1074#1072#1085#1080#1077
+        OnClick = N3Click
       end
       object N4: TMenuItem
         Caption = #1044#1077#1096#1080#1092#1088#1086#1074#1072#1085#1080#1077

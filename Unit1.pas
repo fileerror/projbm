@@ -18,6 +18,7 @@ type
     N7: TMenuItem;
     N8: TMenuItem;
     N9: TMenuItem;
+    procedure N3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,5 +31,10 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TForm_historypage.N3Click(Sender: TObject);
+begin
+  form_historypage.Hide;
+end;
 
 end.
