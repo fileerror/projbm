@@ -1388,21 +1388,13 @@ object Form_decryptchip1: TForm_decryptchip1
       TabOrder = 0
       OnChange = Memo_outputChange
     end
-    object btn_export: TButton
-      Left = 231
-      Top = 327
-      Width = 75
-      Height = 25
-      Caption = #1048#1084#1087#1086#1090#1088#1090' '
-      TabOrder = 1
-    end
     object btn_save: TButton
       Left = 312
       Top = 327
       Width = 75
       Height = 25
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btn_saveClick
     end
   end

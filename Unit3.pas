@@ -19,7 +19,6 @@ type
     Grp_out: TGroupBox;
     lbl_infoout: TLabel;
     Memo_output: TMemo;
-    btn_export: TButton;
     btn_save: TButton;
     Grp_messages: TGroupBox;
     edit_info: TRichEdit;
