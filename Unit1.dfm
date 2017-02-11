@@ -15,8 +15,8 @@ object Form_historypage: TForm_historypage
   PixelsPerInch = 96
   TextHeight = 13
   object MainMenu1: TMainMenu
-    Left = 928
-    Top = 456
+    Left = 336
+    Top = 104
     object N1: TMenuItem
       Caption = #1064#1080#1092#1088' '#1086#1076#1085#1086#1072#1083#1092#1072#1074#1080#1090#1085#1086#1081' '#1079#1072#1084#1077#1085#1099
     end
@@ -28,6 +28,7 @@ object Form_historypage: TForm_historypage
       end
       object N4: TMenuItem
         Caption = #1044#1077#1096#1080#1092#1088#1086#1074#1072#1085#1080#1077
+        OnClick = N4Click
       end
       object N5: TMenuItem
         Caption = #1042#1079#1083#1086#1084' '#1096#1080#1092#1088#1072' '#1084#1077#1090#1086#1076#1086#1084' '#1080#1085#1076#1077#1082#1089#1072' '#1089#1086#1074#1087#1072#1076#1077#1085#1080#1081

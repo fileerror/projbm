@@ -19,6 +19,7 @@ type
     N8: TMenuItem;
     N9: TMenuItem;
     procedure N3Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,9 +33,17 @@ implementation
 
 {$R *.dfm}
 
+uses Unit2, Unit3;
+
 procedure TForm_historypage.N3Click(Sender: TObject);
 begin
   form_historypage.Hide;
+  form_encryptchip1.show;
+end;
+
+procedure TForm_historypage.N4Click(Sender: TObject);
+begin
+  form_decryptchip1.show;
 end;
 
 end.

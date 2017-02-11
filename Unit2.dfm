@@ -1,7 +1,8 @@
-object Form_encriptchip1: TForm_encriptchip1
+object Form_encryptchip1: TForm_encryptchip1
   Left = 0
   Top = 0
-  Caption = 'Form_encriptchip1'
+  Align = alCustom
+  Caption = 'Form_encryptchip1'
   ClientHeight = 462
   ClientWidth = 1080
   Color = clBtnFace
@@ -11,6 +12,8 @@ object Form_encriptchip1: TForm_encriptchip1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object lbl_1: TLabel
@@ -1322,96 +1325,121 @@ object Form_encriptchip1: TForm_encriptchip1
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
       0000}
     Spacing = 15
-  end
-  object edit_info: TRichEdit
-    Left = 0
-    Top = 397
-    Width = 1080
-    Height = 65
-    Align = alBottom
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-    ParentFont = False
-    TabOrder = 0
-    Zoom = 100
-    ExplicitTop = 544
+    OnClick = btn_encryptClick
   end
   object Edit_key: TEdit
     Left = 464
     Top = 136
     Width = 145
     Height = 21
-    TabOrder = 1
+    TabOrder = 0
   end
-  object GroupBox1: TGroupBox
+  object Grp_in: TGroupBox
     Left = 8
     Top = 8
     Width = 417
     Height = 369
-    Caption = 'GroupBox1'
-    TabOrder = 2
-    object Label1: TLabel
+    Caption = #1048#1089#1093#1086#1076#1085#1099#1081' '#1090#1077#1082#1089#1090
+    TabOrder = 1
+    object lbl_infoin: TLabel
       Left = 19
       Top = 327
-      Width = 160
+      Width = 87
       Height = 13
-      Caption = 'dgsdgsdgasdgsagsdgasdgasgsad'
+      Caption = #1042#1089#1077#1075#1086' 0 '#1089#1080#1084#1074#1086#1083#1086#1074
     end
     object Memo_input: TMemo
       Left = 19
       Top = 16
       Width = 374
       Height = 305
+      ScrollBars = ssVertical
       TabOrder = 0
+      OnChange = Memo_inputChange
     end
-    object Button1: TButton
-      Left = 318
+    object btn_load: TButton
+      Left = 280
       Top = 327
-      Width = 75
+      Width = 113
       Height = 25
-      Caption = 'Button1'
+      Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1079' '#1092#1072#1081#1083#1072
       TabOrder = 1
-    end
-    object Button2: TButton
-      Left = 318
-      Top = 327
-      Width = 75
-      Height = 25
-      Caption = 'Button2'
-      TabOrder = 2
+      OnClick = btn_loadClick
     end
   end
-  object GroupBox2: TGroupBox
+  object Grp_out: TGroupBox
     Left = 648
     Top = 8
     Width = 417
     Height = 369
-    Caption = 'GroupBox2'
-    TabOrder = 3
-    object Label2: TLabel
+    Caption = #1047#1072#1096#1080#1092#1088#1086#1074#1072#1085#1085#1099#1081' '#1090#1077#1082#1089#1090
+    TabOrder = 2
+    object lbl_infoout: TLabel
       Left = 24
       Top = 327
-      Width = 290
-      Height = 25
-      Caption = 'Label2'
+      Width = 87
+      Height = 13
+      Caption = #1042#1089#1077#1075#1086' 0 '#1089#1080#1084#1074#1086#1083#1086#1074
     end
     object Memo_output: TMemo
-      Left = 24
+      Left = 16
       Top = 16
       Width = 374
       Height = 305
+      ScrollBars = ssVertical
       TabOrder = 0
+      OnChange = Memo_outputChange
     end
-    object Button3: TButton
-      Left = 320
+    object btn_export: TButton
+      Left = 231
       Top = 327
       Width = 75
       Height = 25
-      Caption = 'Button3'
+      Caption = #1048#1084#1087#1086#1090#1088#1090' '
       TabOrder = 1
+      OnClick = btn_exportClick
     end
+    object btn_save: TButton
+      Left = 312
+      Top = 327
+      Width = 75
+      Height = 25
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      TabOrder = 2
+      OnClick = btn_saveClick
+    end
+  end
+  object Grp_messages: TGroupBox
+    Left = 0
+    Top = 392
+    Width = 1080
+    Height = 70
+    Align = alBottom
+    Caption = #1057#1086#1086#1073#1097#1077#1085#1080#1103
+    TabOrder = 3
+    object edit_info: TRichEdit
+      Left = 2
+      Top = 16
+      Width = 1076
+      Height = 52
+      Align = alBottom
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      ScrollBars = ssVertical
+      TabOrder = 0
+      Zoom = 100
+    end
+  end
+  object OpenTextFileDialog1: TOpenTextFileDialog
+    Left = 488
+    Top = 32
+  end
+  object SaveTextFileDialog1: TSaveTextFileDialog
+    Left = 576
+    Top = 32
   end
 end
