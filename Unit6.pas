@@ -17,6 +17,7 @@ const m: set of ansichar = ['`','.', ',', '?', '!', ':', ';', ' ', '-', '''', ')
                         #10, #13, #0, #185, #171, #133, #147, #148, #150, #151,
                         #187, #34,#96,#39];
 
+function decryptENG(a,b:ansistring):ansistring;
 function encryptENG(a,b:ansistring): ansistring;
 function upkeystr(a:ansistring):ansistring;
 function kbinstr(a:ansistring): yaz;
@@ -24,11 +25,24 @@ procedure totalcleanstr(var a:ansistring);
 
 implementation
 uses unit2;
-procedure writemess(a,b,c:ansistring);
+
+function decryptENG(a,b:ansistring):ansistring;
+var i,j,k,ind,posres:integer;
+    s,key,f:ansistring;
 begin
-
+  f:='';
+  s:=a;
+  key:=b;
+  s:=upkeystr(s);
+  key:=upkeystr(key);
+  for I := 0 to length(s)-1 do begin
+    ind:=i mod length(key);
+    posres:=ord(s[i+1])-ord(key[ind+1])+65;
+    if posres<64 then posres:=posres+26;
+    f:=f+ansichar(posres);
+  end;
+  decryptENG:=f;
 end;
-
 
 procedure totalcleanstr(var a:ansistring);                //TOTALCLEANSTR
 var k:integer;
@@ -109,10 +123,10 @@ begin
     f:=f+ansichar(posres);
     inc(process);
     if process>3 then process:=0;
-    if process=0 then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования '
-      else if process=1 then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования .'
-        else if process=2 then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования ..'
-          else if process=3 then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования ...';
+    if (I mod 1000=0) and (process=0) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования '
+      else if (I mod 1000=0) and (process=1) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования .'
+        else if (I mod 1000=0) and (process=2) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования ..'
+          else if (I mod 1000=0) and (process=3) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования ...';
   end;
   encryptENG:=f;
   form_encryptchip1.edit_info.Lines.Delete(form_encryptchip1.edit_info.Lines.Count-1);

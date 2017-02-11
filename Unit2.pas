@@ -51,25 +51,25 @@ implementation
 uses Unit1, Unit4;
 
 procedure infomess(a:ansistring;col:tcolor);
+var re:int64;
 begin
+  re:=length(form_encryptchip1.edit_info.Text)-(form_encryptchip1.edit_info.Lines.Count);
   form_encryptchip1.edit_info.Lines.Append('('+timetostr(now)+') - '+a);
-  form_encryptchip1.edit_info.SelStart:=0;
-  form_encryptchip1.edit_info.SelLength:=12;
+  form_encryptchip1.edit_info.SelStart:=re;
+  form_encryptchip1.edit_info.SelLength:=re+10;
   form_encryptchip1.edit_info.SelAttributes.Color:=clblue;
-  form_encryptchip1.edit_info.SelStart:=13;
-  form_encryptchip1.edit_info.SelLength:=13+length(a);
+  form_encryptchip1.edit_info.SelStart:=re+11;
+  form_encryptchip1.edit_info.SelLength:=length(form_encryptchip1.edit_info.Text);
   form_encryptchip1.edit_info.SelAttributes.Color:=col;
-
-
+   form_encryptchip1.edit_info.SelStart:=length(form_encryptchip1.edit_info.Text);
+  form_encryptchip1.edit_info.SelLength:=0;
 end;
 
 procedure TForm_encryptchip1.btn_encryptClick(Sender: TObject);
 var s,key:ansistring;
 begin
-  if (edit_key.Text='') and (memo_input.Text='') then begin
-    infomess('Ошибка: не введены параметры',clred);
-    exit
-  end else begin
+  if (edit_key.Text<>'') and (memo_input.Text<>'') then
+   begin
         infomess('Старт шифрования',clblack);
         s:=memo_input.Text;
         totalcleanstr(s);
@@ -78,15 +78,23 @@ begin
         memo_output.Text:=encryptENG(s,key);
         asc:=true;
         infomess('Текст зашифрован',clgreen);
-      end;
-  if edit_key.Text='' then begin
-    infomess('Ошибка: не введен ключ',clred);
-    exit;
-  end;
-  if memo_input.Text='' then begin
-    infomess('Ошибка: не введен текст', clred);
-    exit;
-  end;
+   end
+  else if (edit_key.Text='') and (memo_input.Text<>'') then
+    begin
+      infomess('Ошибка: не введен ключ',clred);
+      exit;
+    end
+    else if (memo_input.Text='') and (edit_key.Text<>'') then
+      begin
+        infomess('Ошибка: не введен текст', clred);
+        exit;
+      end else
+        begin
+          infomess('Ошибка: не введены параметры',clred);
+          exit
+        end;
+
+
 end;
 
 procedure TForm_encryptchip1.btn_exportClick(Sender: TObject);
@@ -102,7 +110,6 @@ end;
 procedure TForm_encryptchip1.btn_saveClick(Sender: TObject);
 begin
   if savetextfiledialog1.Execute then memo_output.Lines.SaveToFile(savetextfiledialog1.FileName+'.txt');
-
 end;
 
 procedure TForm_encryptchip1.FormClose(Sender: TObject;

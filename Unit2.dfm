@@ -3,7 +3,7 @@ object Form_encryptchip1: TForm_encryptchip1
   Top = 0
   Align = alCustom
   Caption = 'Form_encryptchip1'
-  ClientHeight = 462
+  ClientHeight = 480
   ClientWidth = 1080
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -1411,27 +1411,32 @@ object Form_encryptchip1: TForm_encryptchip1
   end
   object Grp_messages: TGroupBox
     Left = 0
-    Top = 392
+    Top = 386
     Width = 1080
-    Height = 70
+    Height = 94
     Align = alBottom
     Caption = #1057#1086#1086#1073#1097#1077#1085#1080#1103
     TabOrder = 3
+    ExplicitTop = 408
     object edit_info: TRichEdit
       Left = 2
-      Top = 16
+      Top = 15
       Width = 1076
-      Height = 52
+      Height = 77
       Align = alBottom
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Tahoma'
       Font.Style = []
+      HideSelection = False
       ParentFont = False
+      ParentShowHint = False
       ScrollBars = ssVertical
+      ShowHint = False
       TabOrder = 0
       Zoom = 100
+      ExplicitLeft = 4
     end
   end
   object OpenTextFileDialog1: TOpenTextFileDialog
