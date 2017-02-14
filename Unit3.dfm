@@ -27,7 +27,7 @@ object Form_decryptchip1: TForm_decryptchip1
     Font.Style = []
     ParentFont = False
   end
-  object btn_encrypt: TSpeedButton
+  object btn_decrypt: TSpeedButton
     Left = 431
     Top = 163
     Width = 211
@@ -1323,7 +1323,7 @@ object Form_decryptchip1: TForm_decryptchip1
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
       0000}
     Spacing = 15
-    OnClick = btn_encryptClick
+    OnClick = btn_decryptClick
   end
   object Edit_key: TEdit
     Left = 464
@@ -1354,6 +1354,7 @@ object Form_decryptchip1: TForm_decryptchip1
       ScrollBars = ssVertical
       TabOrder = 0
       OnChange = Memo_inputChange
+      OnKeyDown = Memo_inputKeyDown
     end
     object btn_load: TButton
       Left = 280
@@ -1387,6 +1388,7 @@ object Form_decryptchip1: TForm_decryptchip1
       ScrollBars = ssVertical
       TabOrder = 0
       OnChange = Memo_outputChange
+      OnKeyDown = Memo_outputKeyDown
     end
     object btn_save: TButton
       Left = 312
@@ -1419,6 +1421,7 @@ object Form_decryptchip1: TForm_decryptchip1
       Font.Style = []
       HideSelection = False
       ParentFont = False
+      ReadOnly = True
       ScrollBars = ssVertical
       TabOrder = 0
       Zoom = 100

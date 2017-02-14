@@ -1,7 +1,6 @@
 object Form_encryptchip1: TForm_encryptchip1
   Left = 0
   Top = 0
-  Align = alCustom
   Caption = 'Form_encryptchip1'
   ClientHeight = 480
   ClientWidth = 1080
@@ -1353,9 +1352,11 @@ object Form_encryptchip1: TForm_encryptchip1
       Top = 16
       Width = 374
       Height = 305
+      HideSelection = False
       ScrollBars = ssVertical
       TabOrder = 0
       OnChange = Memo_inputChange
+      OnKeyDown = Memo_inputKeyDown
     end
     object btn_load: TButton
       Left = 280
@@ -1382,22 +1383,14 @@ object Form_encryptchip1: TForm_encryptchip1
       Caption = #1042#1089#1077#1075#1086' 0 '#1089#1080#1084#1074#1086#1083#1086#1074
     end
     object Memo_output: TMemo
-      Left = 16
+      Left = 19
       Top = 16
       Width = 374
       Height = 305
       ScrollBars = ssVertical
       TabOrder = 0
       OnChange = Memo_outputChange
-    end
-    object btn_export: TButton
-      Left = 231
-      Top = 327
-      Width = 75
-      Height = 25
-      Caption = #1048#1084#1087#1086#1090#1088#1090' '
-      TabOrder = 1
-      OnClick = btn_exportClick
+      OnKeyDown = Memo_outputKeyDown
     end
     object btn_save: TButton
       Left = 312
@@ -1405,7 +1398,7 @@ object Form_encryptchip1: TForm_encryptchip1
       Width = 75
       Height = 25
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btn_saveClick
     end
   end
@@ -1417,7 +1410,6 @@ object Form_encryptchip1: TForm_encryptchip1
     Align = alBottom
     Caption = #1057#1086#1086#1073#1097#1077#1085#1080#1103
     TabOrder = 3
-    ExplicitTop = 408
     object edit_info: TRichEdit
       Left = 2
       Top = 15
@@ -1432,11 +1424,11 @@ object Form_encryptchip1: TForm_encryptchip1
       HideSelection = False
       ParentFont = False
       ParentShowHint = False
+      ReadOnly = True
       ScrollBars = ssVertical
       ShowHint = False
       TabOrder = 0
       Zoom = 100
-      ExplicitLeft = 4
     end
   end
   object OpenTextFileDialog1: TOpenTextFileDialog

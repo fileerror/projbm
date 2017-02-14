@@ -13,7 +13,7 @@ uses
 
 begin
   Application.Initialize;
-  Application.MainFormOnTaskbar := True;
+ // Application.MainFormOnTaskbar := True;
   Application.CreateForm(TForm_historypage, Form_historypage);
   Application.CreateForm(TForm_encryptchip1, Form_encryptchip1);
   Application.CreateForm(TForm_decryptchip1, Form_decryptchip1);

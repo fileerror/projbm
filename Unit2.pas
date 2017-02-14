@@ -19,7 +19,6 @@ type
     Grp_out: TGroupBox;
     lbl_infoin: TLabel;
     lbl_infoout: TLabel;
-    btn_export: TButton;
     OpenTextFileDialog1: TOpenTextFileDialog;
     edit_info: TRichEdit;
     Grp_messages: TGroupBox;
@@ -33,6 +32,10 @@ type
     procedure btn_saveClick(Sender: TObject);
     procedure Memo_outputChange(Sender: TObject);
     procedure btn_exportClick(Sender: TObject);
+    procedure Memo_inputKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Memo_outputKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -68,29 +71,29 @@ end;
 procedure TForm_encryptchip1.btn_encryptClick(Sender: TObject);
 var s,key:ansistring;
 begin
-  if (edit_key.Text<>'') and (memo_input.Text<>'') then
+  s:=memo_input.Text;
+  if s<>'' then totalcleanstr(s);
+  key:=edit_key.Text;
+  if key<>'' then totalcleanstr(key);
+  if (key<>'') and (s<>'') then
    begin
         infomess('Старт шифрования',clblack);
-        s:=memo_input.Text;
-        totalcleanstr(s);
-        key:=edit_key.Text;
-        totalcleanstr(key);
         memo_output.Text:=encryptENG(s,key);
         asc:=true;
         infomess('Текст зашифрован',clgreen);
    end
-  else if (edit_key.Text='') and (memo_input.Text<>'') then
+  else if (key='') and (s<>'') then
     begin
-      infomess('Ошибка: не введен ключ',clred);
+      infomess('Ошибка: ключ введен некорректно',clred);
       exit;
     end
-    else if (memo_input.Text='') and (edit_key.Text<>'') then
+    else if (s='') and (key<>'') then
       begin
-        infomess('Ошибка: не введен текст', clred);
+        infomess('Ошибка: текст введен некорректно', clred);
         exit;
       end else
         begin
-          infomess('Ошибка: не введены параметры',clred);
+          infomess('Ошибка: параметры введены некорректно',clred);
           exit
         end;
 
@@ -116,6 +119,10 @@ procedure TForm_encryptchip1.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   form_historypage.show;
+  memo_input.Clear;
+  memo_output.Clear;
+  edit_key.Clear;
+  edit_info.Clear;
 end;
 
 procedure TForm_encryptchip1.FormCreate(Sender: TObject);
@@ -137,6 +144,12 @@ begin
 
 end;
 
+procedure TForm_encryptchip1.Memo_inputKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_input.SelectAll;
+end;
+
 procedure TForm_encryptchip1.Memo_outputChange(Sender: TObject);
 var s:ansistring;
 begin
@@ -148,6 +161,12 @@ begin
   if s='' then lbl_infoout.Caption:='Всего 0 символов' else begin
     lbl_infoout.Caption:='Всего '+inttostr(length(s))+' символов';
   end;
+end;
+
+procedure TForm_encryptchip1.Memo_outputKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_output.SelectAll;
 end;
 
 end.

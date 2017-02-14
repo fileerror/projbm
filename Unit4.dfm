@@ -11,9 +11,10 @@ object Form_hackchast: TForm_hackchast
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
-  object btn_encrypt: TSpeedButton
+  object btn_decrypt: TSpeedButton
     Left = 431
     Top = 155
     Width = 211
@@ -1309,7 +1310,7 @@ object Form_hackchast: TForm_hackchast
       FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF00
       0000}
     Spacing = 15
-    OnClick = btn_encryptClick
+    OnClick = btn_decryptClick
   end
   object lbl_1: TLabel
     Left = 431
@@ -1320,6 +1321,19 @@ object Form_hackchast: TForm_hackchast
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
     Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
+  object lbl_2: TLabel
+    Left = 480
+    Top = 88
+    Width = 112
+    Height = 18
+    Caption = #1050#1083#1102#1095#1077#1074#1086#1077' '#1089#1083#1086#1074#1086
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -1345,6 +1359,7 @@ object Form_hackchast: TForm_hackchast
       Height = 305
       ScrollBars = ssVertical
       TabOrder = 0
+      OnKeyDown = Memo_inputKeyDown
     end
     object btn_load: TButton
       Left = 280
@@ -1377,14 +1392,7 @@ object Form_hackchast: TForm_hackchast
       Height = 305
       ScrollBars = ssVertical
       TabOrder = 0
-    end
-    object btn_export: TButton
-      Left = 231
-      Top = 327
-      Width = 75
-      Height = 25
-      Caption = #1048#1084#1087#1086#1090#1088#1090' '
-      TabOrder = 1
+      OnKeyDown = Memo_outputKeyDown
     end
     object btn_save: TButton
       Left = 312
@@ -1392,7 +1400,7 @@ object Form_hackchast: TForm_hackchast
       Width = 75
       Height = 25
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
-      TabOrder = 2
+      TabOrder = 1
       OnClick = btn_saveClick
     end
   end
@@ -1404,7 +1412,6 @@ object Form_hackchast: TForm_hackchast
     Align = alBottom
     Caption = #1057#1086#1086#1073#1097#1077#1085#1080#1103
     TabOrder = 2
-    ExplicitTop = 408
     object edit_info: TRichEdit
       Left = 2
       Top = 15
@@ -1419,6 +1426,7 @@ object Form_hackchast: TForm_hackchast
       HideSelection = False
       ParentFont = False
       ParentShowHint = False
+      ReadOnly = True
       ScrollBars = ssVertical
       ShowHint = False
       TabOrder = 0
@@ -1434,6 +1442,14 @@ object Form_hackchast: TForm_hackchast
     MinValue = 1
     TabOrder = 3
     Value = 5
+  end
+  object edit_key: TEdit
+    Left = 480
+    Top = 112
+    Width = 113
+    Height = 21
+    ReadOnly = True
+    TabOrder = 4
   end
   object OpenTextFileDialog1: TOpenTextFileDialog
     Left = 152

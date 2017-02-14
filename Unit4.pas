@@ -9,7 +9,7 @@ uses
 
 type
   TForm_hackchast = class(TForm)
-    btn_encrypt: TSpeedButton;
+    btn_decrypt: TSpeedButton;
     Grp_in: TGroupBox;
     lbl_infoin: TLabel;
     Memo_input: TMemo;
@@ -17,7 +17,6 @@ type
     Grp_out: TGroupBox;
     lbl_infoout: TLabel;
     Memo_output: TMemo;
-    btn_export: TButton;
     btn_save: TButton;
     Grp_messages: TGroupBox;
     edit_info: TRichEdit;
@@ -25,9 +24,16 @@ type
     SaveTextFileDialog1: TSaveTextFileDialog;
     lbl_1: TLabel;
     spdt_maxlenkey: TSpinEdit;
+    edit_key: TEdit;
+    lbl_2: TLabel;
     procedure btn_loadClick(Sender: TObject);
     procedure btn_saveClick(Sender: TObject);
-    procedure btn_encryptClick(Sender: TObject);
+    procedure btn_decryptClick(Sender: TObject);
+    procedure Memo_inputKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Memo_outputKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -40,6 +46,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses Unit1;
 
 procedure infomess(a:ansistring;col:tcolor);
 var re:int64;
@@ -56,18 +64,21 @@ begin
   form_hackchast.edit_info.SelLength:=0;
 end;
 
-procedure TForm_hackchast.btn_encryptClick(Sender: TObject);
-var s:ansistring;
+procedure TForm_hackchast.btn_decryptClick(Sender: TObject);
+var s,key:ansistring;
 begin
-   if (memo_input.Text<>'') then
+   s:=memo_input.Text;
+   if s<>'' then totalcleanstr(s);
+   if (s<>'')then// and (form_hackchast.spdt_maxlenkey.Value<=length(s) div 2) then
    begin
         infomess('Старт дешифрования',clblack);
-        s:=memo_input.Text;
-        memo_output.Text:=decryptENG(s,getkey(s));
+        key:=getkey(s);
+        edit_key.Text:=key;
+        memo_output.Text:=decryptENG(s,key);
         infomess('Текст расшифрован',clgreen);
    end
-    else begin
-        infomess('Ошибка: не введен шифртекст', clred);
+      else begin
+        infomess('Ошибка: шифртекст введен некорректно', clred);
         exit;
       end
 end;
@@ -81,6 +92,27 @@ end;
 procedure TForm_hackchast.btn_saveClick(Sender: TObject);
 begin
   if savetextfiledialog1.Execute then memo_output.Lines.SaveToFile(savetextfiledialog1.FileName+'.txt');
+end;
+
+procedure TForm_hackchast.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  form_historypage.show;
+  memo_input.Clear;
+  memo_output.Clear;
+  edit_key.Clear;
+  edit_info.Clear;
+end;
+
+procedure TForm_hackchast.Memo_inputKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_input.SelectAll;
+end;
+
+procedure TForm_hackchast.Memo_outputKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+   if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_output.SelectAll;
 end;
 
 end.

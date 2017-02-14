@@ -10,7 +10,7 @@ uses
 type
   TForm_decryptchip1 = class(TForm)
     lbl_1: TLabel;
-    btn_encrypt: TSpeedButton;
+    btn_decrypt: TSpeedButton;
     Edit_key: TEdit;
     Grp_in: TGroupBox;
     lbl_infoin: TLabel;
@@ -24,12 +24,16 @@ type
     edit_info: TRichEdit;
     OpenTextFileDialog1: TOpenTextFileDialog;
     SaveTextFileDialog1: TSaveTextFileDialog;
-    procedure btn_encryptClick(Sender: TObject);
+    procedure btn_decryptClick(Sender: TObject);
     procedure btn_loadClick(Sender: TObject);
     procedure btn_saveClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure Memo_inputChange(Sender: TObject);
     procedure Memo_outputChange(Sender: TObject);
+    procedure Memo_inputKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure Memo_outputKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
 
   private
     { Private declarations }
@@ -61,31 +65,31 @@ begin
   form_decryptchip1.edit_info.SelLength:=0;
 end;
 
-procedure TForm_decryptchip1.btn_encryptClick(Sender: TObject);
+procedure TForm_decryptchip1.btn_decryptClick(Sender: TObject);
 var s,key:ansistring;
 begin
-   if (edit_key.Text<>'') and (memo_input.Text<>'') then
+  s:=memo_input.Text;
+  if s<>'' then totalcleanstr(s);
+  key:=edit_key.Text;
+  if key<>'' then totalcleanstr(key);
+  if (key<>'') and (s<>'') then
    begin
         infomess('Старт дешифрования',clblack);
-        s:=memo_input.Text;
-        totalcleanstr(s);
-        key:=edit_key.Text;
-        totalcleanstr(key);
         memo_output.Text:=decryptENG(s,key);
         infomess('Текст расшифрован',clgreen);
    end
-  else if (edit_key.Text='') and (memo_input.Text<>'') then
+  else if (key='') and (s<>'') then
     begin
-      infomess('Ошибка: не введен ключ',clred);
+      infomess('Ошибка: ключ введен некорректно',clred);
       exit;
     end
-    else if (memo_input.Text='') and (edit_key.Text<>'') then
+    else if (s='') and (key<>'') then
       begin
-        infomess('Ошибка: не введен текст', clred);
+        infomess('Ошибка: текст введен некорректно', clred);
         exit;
       end else
         begin
-          infomess('Ошибка: не введены параметры',clred);
+          infomess('Ошибка: параметры введены некорректно',clred);
           exit
         end;
 end;
@@ -106,6 +110,10 @@ procedure TForm_decryptchip1.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   form_historypage.show;
+  memo_input.Clear;
+  memo_output.Clear;
+  edit_key.Clear;
+  edit_info.Clear;
 end;
 
 procedure TForm_decryptchip1.Memo_inputChange(Sender: TObject);
@@ -120,6 +128,12 @@ begin
   end;
 end;
 
+procedure TForm_decryptchip1.Memo_inputKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_input.SelectAll;
+end;
+
 procedure TForm_decryptchip1.Memo_outputChange(Sender: TObject);
 var s:ansistring;
 begin
@@ -127,6 +141,12 @@ begin
   if s='' then lbl_infoout.Caption:='Всего 0 символов' else begin
     lbl_infoout.Caption:='Всего '+inttostr(length(s))+' символов';
   end;
+end;
+
+procedure TForm_decryptchip1.Memo_outputKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_output.SelectAll;
 end;
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Menus, Vcl.StdCtrls;
 
 type
   TForm_historypage = class(TForm)
@@ -18,9 +18,11 @@ type
     N7: TMenuItem;
     N8: TMenuItem;
     N9: TMenuItem;
+    Label1: TLabel;
     procedure N3Click(Sender: TObject);
     procedure N4Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,6 +52,12 @@ end;
 procedure TForm_historypage.N5Click(Sender: TObject);
 begin
   form_hackchast.show;
+  form_historypage.Hide;
+end;
+
+procedure TForm_historypage.N9Click(Sender: TObject);
+begin
+  form_historypage.Close
 end;
 
 end.

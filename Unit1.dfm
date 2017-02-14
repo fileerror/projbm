@@ -14,6 +14,19 @@ object Form_historypage: TForm_historypage
   OldCreateOrder = False
   PixelsPerInch = 96
   TextHeight = 13
+  object Label1: TLabel
+    Left = 192
+    Top = 216
+    Width = 380
+    Height = 48
+    Caption = #1047#1076#1077#1089#1100' '#1073#1091#1076#1077#1090' '#1080#1089#1090#1086#1088#1080#1103
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -40
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object MainMenu1: TMainMenu
     Left = 336
     Top = 104
@@ -35,7 +48,7 @@ object Form_historypage: TForm_historypage
         OnClick = N5Click
       end
       object N6: TMenuItem
-        Caption = #1042#1079#1083#1086#1084' '#1096#1080#1074#1088#1072' '#1084#1077#1090#1086#1076#1086#1084' '#1050#1072#1089#1080#1089#1082#1080
+        Caption = #1042#1079#1083#1086#1084' '#1096#1080#1092#1088#1072' '#1084#1077#1090#1086#1076#1086#1084' '#1050#1072#1089#1080#1089#1082#1080
       end
     end
     object N7: TMenuItem
@@ -46,6 +59,7 @@ object Form_historypage: TForm_historypage
     end
     object N9: TMenuItem
       Caption = #1042#1099#1093#1086#1076
+      OnClick = N9Click
     end
   end
 end
