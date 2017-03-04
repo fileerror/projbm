@@ -1,9 +1,11 @@
 object Form_historypage: TForm_historypage
   Left = 0
   Top = 0
+  Align = alCustom
+  BorderStyle = bsSingle
   Caption = 'Form_historypage'
-  ClientHeight = 499
-  ClientWidth = 982
+  ClientHeight = 383
+  ClientWidth = 771
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -12,6 +14,7 @@ object Form_historypage: TForm_historypage
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  Position = poDesktopCenter
   PixelsPerInch = 96
   TextHeight = 13
   object Label1: TLabel
@@ -53,9 +56,11 @@ object Form_historypage: TForm_historypage
     end
     object N7: TMenuItem
       Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+      OnClick = N7Click
     end
     object N8: TMenuItem
       Caption = #1054' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+      OnClick = N8Click
     end
     object N9: TMenuItem
       Caption = #1042#1099#1093#1086#1076

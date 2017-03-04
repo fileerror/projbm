@@ -5,13 +5,12 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ComCtrls,unit6,
-  Vcl.ExtDlgs;
+  Vcl.ExtDlgs, Vcl.Menus;
 
 type
   TForm_encryptchip1 = class(TForm)
     Memo_input: TMemo;
     Memo_output: TMemo;
-    Edit_key: TEdit;
     lbl_1: TLabel;
     btn_encrypt: TSpeedButton;
     Grp_in: TGroupBox;
@@ -24,6 +23,17 @@ type
     Grp_messages: TGroupBox;
     btn_save: TButton;
     SaveTextFileDialog1: TSaveTextFileDialog;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    edit_key: TMemo;
     procedure btn_encryptClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure btn_loadClick(Sender: TObject);
@@ -36,6 +46,9 @@ type
       Shift: TShiftState);
     procedure Memo_outputKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure N4Click(Sender: TObject);
+    procedure N5Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -51,7 +64,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit1, Unit4;
+uses Unit1, Unit4, Unit3;
 
 procedure infomess(a:ansistring;col:tcolor);
 var re:int64;
@@ -141,7 +154,8 @@ begin
     totalcleanstr(s);
     lbl_infoin.Caption:='Всего '+inttostr(length(s))+' символов';
   end;
-
+  memo_output.Clear;
+  lbl_infoout.Caption:='Всего 0 символов'
 end;
 
 procedure TForm_encryptchip1.Memo_inputKeyDown(Sender: TObject; var Key: Word;
@@ -167,6 +181,40 @@ procedure TForm_encryptchip1.Memo_outputKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_output.SelectAll;
+end;
+
+procedure TForm_encryptchip1.N4Click(Sender: TObject);
+begin
+  form_decryptchip1.show;
+  form_encryptchip1.Hide;
+  form_decryptchip1.n1.Enabled:=true;
+  form_decryptchip1.n2.Enabled:=true;
+  form_decryptchip1.n3.Enabled:=true;
+  form_decryptchip1.n4.Enabled:=false;
+  form_decryptchip1.n5.Enabled:=true;
+  form_decryptchip1.n6.Enabled:=true;
+  form_decryptchip1.n7.Enabled:=true;
+  form_decryptchip1.n8.Enabled:=true;
+
+end;
+
+procedure TForm_encryptchip1.N5Click(Sender: TObject);
+begin
+  form_hackchast.show;
+  form_encryptchip1.Hide;
+  form_hackchast.n1.Enabled:=true;
+  form_hackchast.n2.Enabled:=true;
+  form_hackchast.n3.Enabled:=true;
+  form_hackchast.n4.Enabled:=true;
+  form_hackchast.n5.Enabled:=false;
+  form_hackchast.n6.Enabled:=true;
+  form_hackchast.n7.Enabled:=true;
+  form_hackchast.n8.Enabled:=true;
+end;
+
+procedure TForm_encryptchip1.N9Click(Sender: TObject);
+begin
+ form_historypage.close;
 end;
 
 end.

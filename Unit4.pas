@@ -5,11 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtDlgs, Vcl.ComCtrls, Vcl.StdCtrls,
-  Vcl.Buttons,unit6, Vcl.Samples.Spin;
+  Vcl.Buttons,unit6, Vcl.Samples.Spin, Vcl.Menus;
 
 type
   TForm_hackchast = class(TForm)
-    btn_decrypt: TSpeedButton;
     Grp_in: TGroupBox;
     lbl_infoin: TLabel;
     Memo_input: TMemo;
@@ -24,16 +23,33 @@ type
     SaveTextFileDialog1: TSaveTextFileDialog;
     lbl_1: TLabel;
     spdt_maxlenkey: TSpinEdit;
-    edit_key: TEdit;
     lbl_2: TLabel;
+    MainMenu1: TMainMenu;
+    N1: TMenuItem;
+    N2: TMenuItem;
+    N3: TMenuItem;
+    N4: TMenuItem;
+    N5: TMenuItem;
+    N6: TMenuItem;
+    N7: TMenuItem;
+    N8: TMenuItem;
+    N9: TMenuItem;
+    Label1: TLabel;
+    btn_decrypt: TSpeedButton;
+    edit_key: TMemo;
     procedure btn_loadClick(Sender: TObject);
     procedure btn_saveClick(Sender: TObject);
     procedure btn_decryptClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure N3Click(Sender: TObject);
+    procedure N4Click(Sender: TObject);
+    procedure N9Click(Sender: TObject);
+    procedure Memo_inputChange(Sender: TObject);
+    procedure Memo_outputChange(Sender: TObject);
     procedure Memo_inputKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure Memo_outputKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -47,7 +63,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit1;
+uses Unit1, Unit2, Unit3;
 
 procedure infomess(a:ansistring;col:tcolor);
 var re:int64;
@@ -69,11 +85,12 @@ var s,key:ansistring;
 begin
    s:=memo_input.Text;
    if s<>'' then totalcleanstr(s);
-   if (s<>'')then// and (form_hackchast.spdt_maxlenkey.Value<=length(s) div 2) then
+   if (s<>'')then
    begin
         infomess('Старт дешифрования',clblack);
         key:=getkey(s);
         edit_key.Text:=key;
+        key:=upkeystr(key);
         memo_output.Text:=decryptENG(s,key);
         infomess('Текст расшифрован',clgreen);
    end
@@ -103,16 +120,73 @@ begin
   edit_info.Clear;
 end;
 
+procedure TForm_hackchast.Memo_inputChange(Sender: TObject);
+var s:ansistring;
+    i:integer;
+    l:yaz;
+begin
+  s:=memo_input.Text;
+  if s='' then lbl_infoin.Caption:='Всего 0 символов' else begin
+    totalcleanstr(s);
+    lbl_infoin.Caption:='Всего '+inttostr(length(s))+' символов';
+  end;
+  memo_output.Clear;
+  lbl_infoout.Caption:='Всего 0 символов'
+end;
+
+
 procedure TForm_hackchast.Memo_inputKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_input.SelectAll;
 end;
 
+procedure TForm_hackchast.Memo_outputChange(Sender: TObject);
+var s:ansistring;
+begin
+  s:=memo_output.Text;
+  if s='' then lbl_infoout.Caption:='Всего 0 символов' else begin
+    lbl_infoout.Caption:='Всего '+inttostr(length(s))+' символов';
+  end;
+end;
+
 procedure TForm_hackchast.Memo_outputKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
-   if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_output.SelectAll;
+  if ((ssctrl in shift) and (key=ord('A'))) or ((ssctrl in shift) and (key=ord('Ф'))) then memo_output.SelectAll;
+end;
+
+procedure TForm_hackchast.N3Click(Sender: TObject);
+begin
+  form_hackchast.Hide;
+  form_encryptchip1.show;
+  form_encryptchip1.n1.Enabled:=true;
+  form_encryptchip1.n2.Enabled:=true;
+  form_encryptchip1.n3.Enabled:=false;
+  form_encryptchip1.n4.Enabled:=true;
+  form_encryptchip1.n5.Enabled:=true;
+  form_encryptchip1.n6.Enabled:=true;
+  form_encryptchip1.n7.Enabled:=true;
+  form_encryptchip1.n8.Enabled:=true;
+end;
+
+procedure TForm_hackchast.N4Click(Sender: TObject);
+begin
+  form_decryptchip1.show;
+  form_hackchast.Hide;
+  form_decryptchip1.n1.Enabled:=true;
+  form_decryptchip1.n2.Enabled:=true;
+  form_decryptchip1.n3.Enabled:=true;
+  form_decryptchip1.n4.Enabled:=false;
+  form_decryptchip1.n5.Enabled:=true;
+  form_decryptchip1.n6.Enabled:=true;
+  form_decryptchip1.n7.Enabled:=true;
+  form_decryptchip1.n8.Enabled:=true;
+end;
+
+procedure TForm_hackchast.N9Click(Sender: TObject);
+begin
+  form_historypage.Close;
 end;
 
 end.

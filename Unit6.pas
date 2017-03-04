@@ -14,10 +14,6 @@ type
   drob = array [1..40] of ansistring;
   chast = array [1..40] of real;
 
-const m: set of ansichar = ['`','.', ',', '?', '!', ':', ';', ' ', '-', '''', ')', '(',
-                        #10, #13, #0, #185, #171, #133, #147, #148, #150, #151,
-                        #187, #34,#96,#39];
-
 function getkey(a:ansistring):ansistring;
 function decryptkeyENG(a:ansistring;b:integer):ansistring;
 function decryptENG(a,b:ansistring):ansistring;
@@ -197,13 +193,6 @@ begin
   decryptkeyENG:=f;
 end;
 
-function getkey(a:ansistring):ansistring;
-var s:ansistring;
-begin
-  s:=a;
-  getkey:=decryptkeyENG(s,habrkey(svodhub(s)));
-end;
-
 function decryptENG(a,b:ansistring):ansistring;
 var i,j,k,ind,posres:integer;
     s,key,f:ansistring;
@@ -211,8 +200,6 @@ begin
   f:='';
   s:=a;
   key:=b;
-  s:=upkeystr(s);
-  key:=upkeystr(key);
   for I := 0 to length(s)-1 do begin
     ind:=i mod length(key);
     posres:=ord(s[i+1])-ord(key[ind+1])+65;
@@ -222,12 +209,20 @@ begin
   decryptENG:=f;
 end;
 
+function getkey(a:ansistring):ansistring;
+var s:ansistring;
+begin
+  s:=a;
+  getkey:=decryptkeyENG(s,habrkey(svodhub(s)));
+end;
+
 procedure totalcleanstr(var a:ansistring);                //TOTALCLEANSTR
 var k:integer;
 begin
+  a:=upkeystr(a);
   k:=1;
   repeat
-    if not(a[k] in ['A'..'Z']) and not(a[k] in ['a'..'z'])
+    if not(a[k] in ['A'..'Z'])
       then delete(a,k,1)
       else inc(k);
   until k>length(a);
@@ -253,7 +248,7 @@ begin
   n:=[];
   w[0].stolb:=0;
   for I := 1 to length(a) do begin
-    if (not (a[i] in m)) and (not(a[i] in n)) then begin
+    if  ((a[i] in ['A'..'Z']) or (a[i] in ['a'..'z']))  and (not(a[i] in n)) then begin
       w[q].sim:=upkeys(a[i]);
       n:=n+[upkeys(a[i]),(ansichar(ord(upkeys(a[i]))+32))];
       w[q].kol:=1;
@@ -273,21 +268,12 @@ begin
   form_encryptchip1.edit_info.Lines.Append('Процесс шифрования ...');
   f:='';
   s:=a;
-  totalcleanstr(s);
   key:=b;
-  s:=upkeystr(s);
-  key:=upkeystr(key);
   for I := 0 to length(s)-1 do begin
     ind:=i mod length(key);
     posres:=ord(s[i+1])+ord(key[ind+1])-65;
     if posres>=91 then posres:=posres-26;
     f:=f+ansichar(posres);
-    inc(process);
-    if process>3 then process:=0;
-    if (I mod 1000=0) and (process=0) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования '
-      else if (I mod 1000=0) and (process=1) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования .'
-        else if (I mod 1000=0) and (process=2) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования ..'
-          else if (I mod 1000=0) and (process=3) then form_encryptchip1.edit_info.Lines[form_encryptchip1.edit_info.Lines.Count-1]:='Процесс шифрования ...';
   end;
   encryptENG:=f;
   form_encryptchip1.edit_info.Lines.Delete(form_encryptchip1.edit_info.Lines.Count-1);
