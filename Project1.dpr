@@ -7,7 +7,8 @@ uses
   Unit3 in 'Unit3.pas' {Form_decryptchip1},
   Unit4 in 'Unit4.pas' {Form_hackchast},
   Unit5 in 'Unit5.pas' {Form_hackkasiski},
-  Unit6 in 'Unit6.pas';
+  Unit6 in 'Unit6.pas',
+  Unit7 in 'Unit7.pas' {Form_stat};
 
 {$R *.res}
 
@@ -19,5 +20,6 @@ begin
   Application.CreateForm(TForm_decryptchip1, Form_decryptchip1);
   Application.CreateForm(TForm_hackchast, Form_hackchast);
   Application.CreateForm(TForm_hackkasiski, Form_hackkasiski);
+  Application.CreateForm(TForm_stat, Form_stat);
   Application.Run;
 end.

@@ -38,7 +38,7 @@ implementation
 
 {$R *.dfm}
 
-uses Unit2, Unit3, Unit4;
+uses Unit2, Unit3, Unit4, Unit7;
 
 procedure TForm_historypage.N3Click(Sender: TObject);
 begin
@@ -85,6 +85,7 @@ end;
 procedure TForm_historypage.N7Click(Sender: TObject);
 begin
   form_historypage.Hide;
+  form_stat.show;
   form_hackchast.n1.Enabled:=true;
   form_hackchast.n2.Enabled:=true;
   form_hackchast.n3.Enabled:=true;

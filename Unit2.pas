@@ -49,6 +49,7 @@ type
     procedure N4Click(Sender: TObject);
     procedure N5Click(Sender: TObject);
     procedure N9Click(Sender: TObject);
+    procedure FormHide(Sender: TObject);
   private
     { Private declarations }
   public
@@ -83,8 +84,10 @@ end;
 
 procedure TForm_encryptchip1.btn_encryptClick(Sender: TObject);
 var s,key:ansistring;
+    lentext:integer;
 begin
   s:=memo_input.Text;
+  lentext:=length(s);
   if s<>'' then totalcleanstr(s);
   key:=edit_key.Text;
   if key<>'' then totalcleanstr(key);
@@ -93,7 +96,7 @@ begin
         infomess('Старт шифрования',clblack);
         memo_output.Text:=encryptENG(s,key);
         asc:=true;
-        infomess('Текст зашифрован',clgreen);
+        infomess('Текст зашифрован//удалено символов: '+inttostr(lentext-length(s))+'//',clgreen);
    end
   else if (key='') and (s<>'') then
     begin
@@ -144,18 +147,28 @@ begin
   asc:=false;
 end;
 
+procedure TForm_encryptchip1.FormHide(Sender: TObject);
+begin
+  memo_input.Clear;
+  memo_output.Clear;
+  edit_key.Clear;
+  edit_info.Clear;
+  lbl_infoin.Caption:='Число символов: 0';
+  lbl_infoout.Caption:='Число символов: 0';
+end;
+
 procedure TForm_encryptchip1.Memo_inputChange(Sender: TObject);
 var s:ansistring;
     i:integer;
     l:yaz;
 begin
   s:=memo_input.Text;
-  if s='' then lbl_infoin.Caption:='Всего 0 символов' else begin
-    totalcleanstr(s);
-    lbl_infoin.Caption:='Всего '+inttostr(length(s))+' символов';
+  if s='' then lbl_infoin.Caption:='Число символов: 0' else begin
+    lbl_infoin.Caption:='Число символов:'+inttostr(length(s));
   end;
   memo_output.Clear;
-  lbl_infoout.Caption:='Всего 0 символов'
+  lbl_infoout.Caption:='Число символов: 0';
+  asc:=false;
 end;
 
 procedure TForm_encryptchip1.Memo_inputKeyDown(Sender: TObject; var Key: Word;
@@ -172,9 +185,10 @@ begin
     asc:=false;
   end;
   s:=memo_output.Text;
-  if s='' then lbl_infoout.Caption:='Всего 0 символов' else begin
-    lbl_infoout.Caption:='Всего '+inttostr(length(s))+' символов';
+  if s='' then lbl_infoout.Caption:='Число символов: 0' else begin
+    lbl_infoout.Caption:='Число символов: '+inttostr(length(s));
   end;
+  if memo_output.Text='' then btn_save.Enabled:=false else btn_save.Enabled:=true;
 end;
 
 procedure TForm_encryptchip1.Memo_outputKeyDown(Sender: TObject; var Key: Word;

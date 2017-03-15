@@ -2,7 +2,7 @@ object Form_encryptchip1: TForm_encryptchip1
   Left = 0
   Top = 0
   BorderStyle = bsSingle
-  Caption = 'Form_encryptchip1'
+  Caption = #1064#1080#1092#1088#1086#1074#1072#1085#1080#1077
   ClientHeight = 383
   ClientWidth = 771
   Color = clBtnFace
@@ -16,6 +16,7 @@ object Form_encryptchip1: TForm_encryptchip1
   Position = poDesktopCenter
   OnClose = FormClose
   OnCreate = FormCreate
+  OnHide = FormHide
   PixelsPerInch = 96
   TextHeight = 13
   object lbl_1: TLabel
@@ -493,9 +494,9 @@ object Form_encryptchip1: TForm_encryptchip1
     object lbl_infoin: TLabel
       Left = 19
       Top = 260
-      Width = 103
+      Width = 111
       Height = 16
-      Caption = #1042#1089#1077#1075#1086' 0 '#1089#1080#1084#1074#1086#1083#1086#1074
+      Caption = #1063#1080#1089#1083#1086' '#1089#1080#1084#1074#1086#1083#1086#1074': 0'
     end
     object Memo_input: TMemo
       Left = 19
@@ -534,9 +535,9 @@ object Form_encryptchip1: TForm_encryptchip1
     object lbl_infoout: TLabel
       Left = 24
       Top = 260
-      Width = 103
+      Width = 111
       Height = 16
-      Caption = #1042#1089#1077#1075#1086' 0 '#1089#1080#1084#1074#1086#1083#1086#1074
+      Caption = #1063#1080#1089#1083#1086' '#1089#1080#1084#1074#1086#1083#1086#1074': 0'
     end
     object Memo_output: TMemo
       Left = 19
@@ -554,6 +555,7 @@ object Form_encryptchip1: TForm_encryptchip1
       Width = 75
       Height = 25
       Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      Enabled = False
       TabOrder = 1
       OnClick = btn_saveClick
     end

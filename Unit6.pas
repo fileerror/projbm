@@ -259,7 +259,6 @@ begin
   kbinstr:=w;
 end;
 
-
 function encryptENG(a,b:ansistring):ansistring;
 var i,j,k,ind,posres,process:integer;
     s,key,f:ansistring;
